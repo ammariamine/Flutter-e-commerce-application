@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shopv2/payment.screen.dart';
-import '../models/produit.dart';
-import '../cart.dart';
+import 'package:shopv2/screens/payment.screen.dart';
+import 'package:shopv2/screens/profile.dart';
+import 'package:shopv2/screens/categorie.screen.dart';
+import '../../models/produit.dart';
+import '../models/cart.dart';
 
 class CartScreen extends StatelessWidget {
   @override
@@ -10,7 +12,7 @@ class CartScreen extends StatelessWidget {
 
     double totalPrice = 0;
     for (var product in products) {
-      totalPrice += double.parse(product.price);
+      totalPrice += double.parse(product.price)*int.parse(product.quantity);
     }
 
     return Scaffold(
@@ -25,7 +27,7 @@ class CartScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 Produit product = products[index];
                 double productTotalPrice =
-                double.parse(product.price);
+                double.parse(product.price)*int.parse(product.quantity);
                 return Card(
                   elevation: 3,
                   margin: EdgeInsets.all(8),
@@ -46,6 +48,7 @@ class CartScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text('Price: \$${product.price}'),
+                        Text('Quantity: ${product.quantity}'),
                         Text('Total: \$${productTotalPrice.toStringAsFixed(2)}'),
                       ],
                     ),
@@ -72,7 +75,7 @@ class CartScreen extends StatelessWidget {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>PaymentScreen()),);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>PaymentScreen(totalPrice: totalPrice,)),);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black87,
@@ -129,6 +132,52 @@ class CartScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1, // Profile screen index
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        elevation: 8.0,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+            // Navigate to Categories screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CategoriesPage()),
+              );
+              break;
+            case 1:
+            // Navigate to Cart screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+              break;
+            case 2:
+            // Navigate to Profile screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+              break;
+          }
+        },
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shopv2/screens/categorie.screen.dart';
 import 'package:shopv2/screens/login.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -217,6 +218,7 @@ class _SignUpPageState extends State<SignUpPage>
         password: _password,
       );
       return credential.user;
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoriesPage(),));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         showDialog(

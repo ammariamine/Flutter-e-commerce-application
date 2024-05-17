@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:photo_view/photo_view.dart';
 
-import '../cart.dart';
-import '../cart.screen.dart';
+import '../models/cart.dart';
+import 'cart.screen.dart';
 import '../models/produit.dart';
 
 class DetailPage extends StatefulWidget {
@@ -173,6 +173,7 @@ class _DetailPageState extends State<DetailPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
                 onPressed: () {
+                  widget.produit.quantity = _quantity.toString();
                   Cart.addItem(widget.produit);
                   Navigator.push(
                     context,

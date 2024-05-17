@@ -77,7 +77,7 @@ class _ProductScreenState extends State<Productscreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>  DetailPage(produit: Produit(Produit.fromSnapshot(shoe).id, Produit.fromSnapshot(shoe).name, Produit.fromSnapshot(shoe).image, Produit.fromSnapshot(shoe).description, Produit.fromSnapshot(shoe).price, Produit.fromSnapshot(shoe).categoryId)),
+                              builder: (context) =>  DetailPage(produit: Produit(Produit.fromSnapshot(shoe).id, Produit.fromSnapshot(shoe).name, Produit.fromSnapshot(shoe).image, Produit.fromSnapshot(shoe).description, Produit.fromSnapshot(shoe).price, Produit.fromSnapshot(shoe).categoryId,Produit.fromSnapshot(shoe).quantity)),
                             ),
                           );
                         },

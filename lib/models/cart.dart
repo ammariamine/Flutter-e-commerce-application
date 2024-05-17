@@ -1,4 +1,4 @@
-import 'models/produit.dart';
+import 'produit.dart';
 
 class Cart {
   static List<Produit> _cartItems = [];

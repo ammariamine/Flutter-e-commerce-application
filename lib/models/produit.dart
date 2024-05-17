@@ -7,7 +7,8 @@ class Produit  {
   late String description;
   late String price;
   late String categoryId;
-  Produit(this.id, this.name, this.image , this.description, this.price , this.categoryId);
+  late String quantity ;
+  Produit(this.id, this.name, this.image , this.description, this.price , this.categoryId,this.quantity);
 
   static Produit fromSnapshot(DocumentSnapshot produitSnapshot) {
     var data = produitSnapshot.data() as Map<String, dynamic>;
@@ -18,7 +19,15 @@ class Produit  {
       data['description'],
       data['price'],
       data['categoryId'],
+      data['quantity'],
     );
   }
-
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'image': image,
+      'quantity' : quantity,
+    };
+  }
 }
